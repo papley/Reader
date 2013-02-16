@@ -453,6 +453,16 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		C6F430FE16D035BC0095B41E /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		1D6058900D05DD3D006BFB54 /* Reader */ = {
 			isa = PBXNativeTarget;
@@ -478,6 +488,7 @@
 				C6F430B516D027490095B41E /* Sources */,
 				C6F430B616D027490095B41E /* Frameworks */,
 				C6F430B716D027490095B41E /* CopyFiles */,
+				C6F430FE16D035BC0095B41E /* Headers */,
 			);
 			buildRules = (
 			);
@@ -817,7 +828,7 @@
 				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
