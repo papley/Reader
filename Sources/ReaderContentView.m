@@ -27,6 +27,7 @@
 #import "ReaderContentView.h"
 #import "ReaderContentPage.h"
 #import "ReaderThumbCache.h"
+#import "ReaderContentContainerView.h"
 
 #import <QuartzCore/QuartzCore.h>
 
@@ -36,7 +37,7 @@
 
 	ReaderContentThumb *theThumbView;
 
-	UIView *theContainerView;
+	ReaderContentContainerView *theContainerView;
 
 	CGFloat zoomAmount;
 }
@@ -106,7 +107,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 		if (theContentView != nil) // Must have a valid and initialized content view
 		{
-			theContainerView = [[UIView alloc] initWithFrame:theContentView.bounds];
+			theContainerView = [[ReaderContentContainerView alloc] initWithFrame:theContentView.bounds];
 
 			theContainerView.autoresizesSubviews = NO;
 			theContainerView.userInteractionEnabled = NO;
@@ -276,7 +277,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 #pragma mark UIScrollViewDelegate methods
 
-- (UIView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
+- (ReaderContentContainerView *)viewForZoomingInScrollView:(UIScrollView *)scrollView
 {
 	return theContainerView;
 }

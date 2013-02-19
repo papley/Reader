@@ -27,6 +27,7 @@
 #import "ReaderContentPage.h"
 #import "ReaderContentTile.h"
 #import "CGPDFDocument.h"
+#import "ReaderContentHighlightView.h"
 
 @implementation ReaderContentPage
 {
@@ -62,7 +63,7 @@
 
 		for (ReaderDocumentLink *link in _links) // Enumerate the links array
 		{
-			UIView *highlight = [[UIView alloc] initWithFrame:link.rect];
+			ReaderContentHighlightView *highlight = [[ReaderContentHighlightView alloc] initWithFrame:link.rect];
 
 			highlight.autoresizesSubviews = NO;
 			highlight.userInteractionEnabled = NO;

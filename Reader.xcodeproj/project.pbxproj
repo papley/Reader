@@ -98,6 +98,18 @@
 		C6F430F916D027F00095B41E /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 458DDFD6140D45FA00C5DA94 /* ImageIO.framework */; };
 		C6F430FA16D0280A0095B41E /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BD5AFD13AE721A00D6FE97 /* MessageUI.framework */; };
 		C6F430FB16D028120095B41E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		C6F4311816D1A5290095B41E /* ReaderScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F4311616D1A5290095B41E /* ReaderScrollView.h */; };
+		C6F4311916D1A5290095B41E /* ReaderScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4311716D1A5290095B41E /* ReaderScrollView.m */; };
+		C6F4311A16D1A5290095B41E /* ReaderScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4311716D1A5290095B41E /* ReaderScrollView.m */; };
+		C6F4311B16D1A5290095B41E /* ReaderScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4311716D1A5290095B41E /* ReaderScrollView.m */; };
+		C6F4312716D1AC420095B41E /* ReaderContentHighlightView.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F4312516D1AC410095B41E /* ReaderContentHighlightView.h */; };
+		C6F4312816D1AC420095B41E /* ReaderContentHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4312616D1AC410095B41E /* ReaderContentHighlightView.m */; };
+		C6F4312916D1AC420095B41E /* ReaderContentHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4312616D1AC410095B41E /* ReaderContentHighlightView.m */; };
+		C6F4312A16D1AC420095B41E /* ReaderContentHighlightView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4312616D1AC410095B41E /* ReaderContentHighlightView.m */; };
+		C6F4312D16D1AD040095B41E /* ReaderContentContainerView.h in Headers */ = {isa = PBXBuildFile; fileRef = C6F4312B16D1AD040095B41E /* ReaderContentContainerView.h */; };
+		C6F4312E16D1AD040095B41E /* ReaderContentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4312C16D1AD040095B41E /* ReaderContentContainerView.m */; };
+		C6F4312F16D1AD040095B41E /* ReaderContentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4312C16D1AD040095B41E /* ReaderContentContainerView.m */; };
+		C6F4313016D1AD040095B41E /* ReaderContentContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F4312C16D1AD040095B41E /* ReaderContentContainerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -215,6 +227,12 @@
 		C6F430D216D027490095B41E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		C6F430D416D027490095B41E /* ReaderLibTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ReaderLibTests.h; sourceTree = "<group>"; };
 		C6F430D516D027490095B41E /* ReaderLibTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ReaderLibTests.m; sourceTree = "<group>"; };
+		C6F4311616D1A5290095B41E /* ReaderScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderScrollView.h; sourceTree = "<group>"; };
+		C6F4311716D1A5290095B41E /* ReaderScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderScrollView.m; sourceTree = "<group>"; };
+		C6F4312516D1AC410095B41E /* ReaderContentHighlightView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReaderContentHighlightView.h; sourceTree = "<group>"; };
+		C6F4312616D1AC410095B41E /* ReaderContentHighlightView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReaderContentHighlightView.m; sourceTree = "<group>"; };
+		C6F4312B16D1AD040095B41E /* ReaderContentContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaderContentContainerView.h; path = Sources/ReaderContentContainerView.h; sourceTree = "<group>"; };
+		C6F4312C16D1AD040095B41E /* ReaderContentContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReaderContentContainerView.m; path = Sources/ReaderContentContainerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -365,6 +383,8 @@
 			children = (
 				45AB72EF141FC0B1003524C3 /* ReaderConstants.h */,
 				45AB72F0141FC0B1003524C3 /* ReaderConstants.m */,
+				C6F4311616D1A5290095B41E /* ReaderScrollView.h */,
+				C6F4311716D1A5290095B41E /* ReaderScrollView.m */,
 				45AB72F7141FC0B1003524C3 /* ReaderDocument.h */,
 				45AB72F8141FC0B1003524C3 /* ReaderDocument.m */,
 				45AB730D141FC0B1003524C3 /* ReaderViewController.h */,
@@ -375,8 +395,12 @@
 				45AB72FA141FC0B1003524C3 /* ReaderMainPagebar.m */,
 				45AB72F5141FC0B1003524C3 /* ReaderContentView.h */,
 				45AB72F6141FC0B1003524C3 /* ReaderContentView.m */,
+				C6F4312B16D1AD040095B41E /* ReaderContentContainerView.h */,
+				C6F4312C16D1AD040095B41E /* ReaderContentContainerView.m */,
 				45AB72F1141FC0B1003524C3 /* ReaderContentPage.h */,
 				45AB72F2141FC0B1003524C3 /* ReaderContentPage.m */,
+				C6F4312516D1AC410095B41E /* ReaderContentHighlightView.h */,
+				C6F4312616D1AC410095B41E /* ReaderContentHighlightView.m */,
 				45AB72F3141FC0B1003524C3 /* ReaderContentTile.h */,
 				45AB72F4141FC0B1003524C3 /* ReaderContentTile.m */,
 				45AB7311141FC0B1003524C3 /* ThumbsViewController.h */,
@@ -458,6 +482,9 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6F4311816D1A5290095B41E /* ReaderScrollView.h in Headers */,
+				C6F4312716D1AC420095B41E /* ReaderContentHighlightView.h in Headers */,
+				C6F4312D16D1AD040095B41E /* ReaderContentContainerView.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +661,9 @@
 				4555C74C14211A00005F448D /* ReaderBookDelegate.m in Sources */,
 				455C7891142687CA0053D73B /* UIXToolbarView.m in Sources */,
 				45D5ADA31610EADD00706B9A /* ReaderDocumentOutline.m in Sources */,
+				C6F4311916D1A5290095B41E /* ReaderScrollView.m in Sources */,
+				C6F4312816D1AC420095B41E /* ReaderContentHighlightView.m in Sources */,
+				C6F4312E16D1AD040095B41E /* ReaderContentContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -665,6 +695,9 @@
 				C6F430F416D027B40095B41E /* ReaderThumbView.m in Sources */,
 				C6F430F516D027B40095B41E /* UIXToolbarView.m in Sources */,
 				C6F430C116D027490095B41E /* ReaderLib.m in Sources */,
+				C6F4311A16D1A5290095B41E /* ReaderScrollView.m in Sources */,
+				C6F4312916D1AC420095B41E /* ReaderContentHighlightView.m in Sources */,
+				C6F4312F16D1AD040095B41E /* ReaderContentContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,6 +706,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C6F430D616D027490095B41E /* ReaderLibTests.m in Sources */,
+				C6F4311B16D1A5290095B41E /* ReaderScrollView.m in Sources */,
+				C6F4312A16D1AC420095B41E /* ReaderContentHighlightView.m in Sources */,
+				C6F4313016D1AD040095B41E /* ReaderContentContainerView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

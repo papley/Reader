@@ -31,6 +31,7 @@
 #import "ReaderContentView.h"
 #import "ReaderThumbCache.h"
 #import "ReaderThumbQueue.h"
+#import "ReaderScrollView.h"
 
 #import <MessageUI/MessageUI.h>
 
@@ -42,7 +43,7 @@
 {
 	ReaderDocument *document;
 
-	UIScrollView *theScrollView;
+	ReaderScrollView *theScrollView;
 
 	ReaderMainToolbar *mainToolbar;
 
@@ -315,7 +316,7 @@
 
 	CGRect viewRect = self.view.bounds; // View controller's view bounds
 
-	theScrollView = [[UIScrollView alloc] initWithFrame:viewRect]; // All
+	theScrollView = [[ReaderScrollView alloc] initWithFrame:viewRect]; // All
 
 	theScrollView.scrollsToTop = NO;
 	theScrollView.pagingEnabled = YES;
@@ -480,7 +481,7 @@
 
 #pragma mark UIScrollViewDelegate methods
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+- (void)scrollViewDidEndDecelerating:(ReaderScrollView *)scrollView
 {
 	__block NSInteger page = 0;
 
@@ -501,7 +502,7 @@
 	if (page != 0) [self showDocumentPage:page]; // Show the page
 }
 
-- (void)scrollViewDidEndScrollingAnimation:(UIScrollView *)scrollView
+- (void)scrollViewDidEndScrollingAnimation:(ReaderScrollView *)scrollView
 {
 	[self showDocumentPage:theScrollView.tag]; // Show page
 
@@ -512,7 +513,7 @@
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)recognizer shouldReceiveTouch:(UITouch *)touch
 {
-	if ([touch.view isKindOfClass:[UIScrollView class]]) return YES;
+	if ([touch.view isKindOfClass:[ReaderScrollView class]]) return YES;
 
 	return NO;
 }
