@@ -1063,6 +1063,7 @@
 				C6F430DA16D027490095B41E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C6F430DB16D027490095B41E /* Build configuration list for PBXNativeTarget "ReaderLibTests" */ = {
 			isa = XCConfigurationList;
@@ -1072,6 +1073,7 @@
 				C6F430DE16D027490095B41E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
