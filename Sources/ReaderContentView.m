@@ -282,6 +282,14 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	return theContainerView;
 }
 
+#pragma mark GestureDelegate methods
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
+shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
+{
+    return YES;
+}
+
 #pragma mark UIResponder instance methods
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
