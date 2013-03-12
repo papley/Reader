@@ -32,8 +32,12 @@
 #import "ReaderThumbCache.h"
 #import "ReaderThumbQueue.h"
 #import "ReaderScrollView.h"
+#import "UIView+ExploreViews.h"
 
 #import <MessageUI/MessageUI.h>
+
+// For printing gestures
+//#import "MainViewController.h"
 
 @interface ReaderViewController () <UIScrollViewDelegate, UIGestureRecognizerDelegate, MFMailComposeViewControllerDelegate,
 									ReaderMainToolbarDelegate, ReaderMainPagebarDelegate, ReaderContentViewDelegate, ThumbsViewControllerDelegate>
@@ -74,6 +78,7 @@
 #pragma mark Properties
 
 @synthesize delegate;
+@synthesize verticalPagingReader;
 
 #pragma mark Support methods
 
@@ -82,10 +87,17 @@
 	NSInteger count = [document.pageCount integerValue];
 
 	if (count > PAGING_VIEWS) count = PAGING_VIEWS; // Limit
-
-	CGFloat contentHeight = theScrollView.bounds.size.height;
-
-	CGFloat contentWidth = (theScrollView.bounds.size.width * count);
+    
+    CGFloat contentWidth, contentHeight;
+	if (verticalPagingReader) {
+        contentHeight = theScrollView.bounds.size.height * count;
+        contentWidth = (theScrollView.bounds.size.width);
+    }
+    else
+    {
+        contentHeight = theScrollView.bounds.size.height;
+        contentWidth = (theScrollView.bounds.size.width * count);
+    }
 
 	theScrollView.contentSize = CGSizeMake(contentWidth, contentHeight);
 }
@@ -116,7 +128,10 @@
 
 			contentView.frame = viewRect; if (page == number) contentOffset = viewRect.origin;
 
-			viewRect.origin.x += viewRect.size.width; // Next view frame position
+            if (verticalPagingReader)
+                viewRect.origin.y += viewRect.size.height; // Next view frame position
+            else
+                viewRect.origin.x += viewRect.size.width; // Next view frame position
 		}
 	];
 
@@ -190,8 +205,10 @@
 
 				[unusedViews removeObjectForKey:key];
 			}
-
-			viewRect.origin.x += viewRect.size.width;
+            if (verticalPagingReader)
+                viewRect.origin.y += viewRect.size.height;
+            else
+                viewRect.origin.x += viewRect.size.width;
 		}
 
 		[unusedViews enumerateKeysAndObjectsUsingBlock: // Remove unused views
@@ -206,24 +223,42 @@
 		];
 
 		unusedViews = nil; // Release unused views
-
-		CGFloat viewWidthX1 = viewRect.size.width;
-		CGFloat viewWidthX2 = (viewWidthX1 * 2.0f);
-
+        CGFloat viewHeightY2, viewWidthX2, viewHeightY1, viewWidthX1;
+        if (verticalPagingReader) {
+            viewHeightY1 = viewRect.size.height;
+            viewHeightY2 = (viewHeightY1 * 2.0f);
+        }
+        else
+        {
+            viewWidthX1 = viewRect.size.width;
+            viewWidthX2 = (viewWidthX1 * 2.0f);
+        }
 		CGPoint contentOffset = CGPointZero;
 
 		if (maxPage >= PAGING_VIEWS)
 		{
-			if (page == maxPage)
-				contentOffset.x = viewWidthX2;
+			if (page == maxPage) {
+				if (verticalPagingReader)
+                    contentOffset.y = viewHeightY2;
+                else
+                    contentOffset.x = viewWidthX2;
+                    }
 			else
-				if (page != minPage)
-					contentOffset.x = viewWidthX1;
+				if (page != minPage) {
+                    if (verticalPagingReader)
+                        contentOffset.y = viewHeightY1;
+                    else
+                        contentOffset.x = viewWidthX1;
+                }
 		}
 		else
-			if (page == (PAGING_VIEWS - 1))
-				contentOffset.x = viewWidthX1;
-
+			if (page == (PAGING_VIEWS - 1)) {
+                if (verticalPagingReader)
+                    contentOffset.y = viewHeightY1;
+                else
+                    contentOffset.x = viewWidthX1;
+            }
+        
 		if (CGPointEqualToPoint(theScrollView.contentOffset, contentOffset) == false)
 		{
 			theScrollView.contentOffset = contentOffset; // Update content offset
@@ -283,6 +318,7 @@
 
 - (id)initWithReaderDocument:(ReaderDocument *)object
 {
+    verticalPagingReader = TRUE; // default to vertical paging
 	id reader = nil; // ReaderViewController object
 
 	if ((object != nil) && ([object isKindOfClass:[ReaderDocument class]]))
@@ -327,11 +363,18 @@
 	theScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	theScrollView.backgroundColor = [UIColor clearColor];
 	theScrollView.userInteractionEnabled = YES;
-	theScrollView.autoresizesSubviews = NO;
+    // TODOPGA: CHANGED TO YES. Does this work?
+    theScrollView.autoresizesSubviews = YES;
 	theScrollView.delegate = self;
 
 	[self.view addSubview:theScrollView];
 
+    // TODOPGA: begin add for printing gestures
+    //    UIPanGestureRecognizer* pangr = theScrollView.panGestureRecognizer;
+    //    [pangr addTarget: [[UIApplication sharedApplication] delegate]
+    //              action:@selector(printGesture:)];
+    // end add for printing gestures
+    
 	CGRect toolbarRect = viewRect;
 	toolbarRect.size.height = TOOLBAR_HEIGHT;
 
@@ -366,6 +409,9 @@
 	[singleTapOne requireGestureRecognizerToFail:doubleTapOne]; // Single tap requires double tap to fail
 
 	contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate date];
+
+    // TODOPGA: DEBUG ONLY
+    // [[self view] exploreViewAtLevel:0];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -532,7 +578,10 @@
 		{
 			CGPoint contentOffset = theScrollView.contentOffset;
 
-			contentOffset.x -= theScrollView.bounds.size.width; // -= 1
+            if (verticalPagingReader)
+                contentOffset.y -= theScrollView.bounds.size.height; // -= 1
+            else
+                contentOffset.x -= theScrollView.bounds.size.width; // -= 1
 
 			[theScrollView setContentOffset:contentOffset animated:YES];
 
@@ -553,7 +602,10 @@
 		{
 			CGPoint contentOffset = theScrollView.contentOffset;
 
-			contentOffset.x += theScrollView.bounds.size.width; // += 1
+            if (verticalPagingReader)
+                contentOffset.y += theScrollView.bounds.size.height; // += 1
+            else
+                contentOffset.x += theScrollView.bounds.size.width; // += 1
 
 			[theScrollView setContentOffset:contentOffset animated:YES];
 
@@ -632,8 +684,15 @@
 		}
 
 		CGRect nextPageRect = viewRect;
-		nextPageRect.size.width = TAP_AREA_SIZE;
-		nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
+        if (verticalPagingReader) {
+            nextPageRect.size.height = TAP_AREA_SIZE;
+            nextPageRect.origin.y = (viewRect.size.height - TAP_AREA_SIZE);
+        }
+        else
+        {
+            nextPageRect.size.width = TAP_AREA_SIZE;
+            nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
+        }
 
 		if (CGRectContainsPoint(nextPageRect, point)) // page++ area
 		{
@@ -641,7 +700,11 @@
 		}
 
 		CGRect prevPageRect = viewRect;
-		prevPageRect.size.width = TAP_AREA_SIZE;
+
+        if (verticalPagingReader)
+            prevPageRect.size.height = TAP_AREA_SIZE;
+        else
+            prevPageRect.size.width = TAP_AREA_SIZE;
 
 		if (CGRectContainsPoint(prevPageRect, point)) // page-- area
 		{
@@ -685,16 +748,25 @@
 		}
 
 		CGRect nextPageRect = viewRect;
-		nextPageRect.size.width = TAP_AREA_SIZE;
-		nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
-
+        if (verticalPagingReader) {
+            nextPageRect.size.height = TAP_AREA_SIZE;
+            nextPageRect.origin.y = (viewRect.size.height - TAP_AREA_SIZE);
+        }
+        else
+        {
+            nextPageRect.size.width = TAP_AREA_SIZE;
+            nextPageRect.origin.x = (viewRect.size.width - TAP_AREA_SIZE);
+        }
 		if (CGRectContainsPoint(nextPageRect, point)) // page++ area
 		{
 			[self incrementPageNumber]; return;
 		}
 
 		CGRect prevPageRect = viewRect;
-		prevPageRect.size.width = TAP_AREA_SIZE;
+        if (verticalPagingReader)
+            prevPageRect.size.height = TAP_AREA_SIZE;
+        else
+            prevPageRect.size.height = TAP_AREA_SIZE;
 
 		if (CGRectContainsPoint(prevPageRect, point)) // page-- area
 		{
