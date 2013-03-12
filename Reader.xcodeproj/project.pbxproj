@@ -61,6 +61,9 @@
 		45BD5AFE13AE721A00D6FE97 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45BD5AFD13AE721A00D6FE97 /* MessageUI.framework */; };
 		45D5AD9F1610E66B00706B9A /* HISTORY.md in Resources */ = {isa = PBXBuildFile; fileRef = 45D5AD9E1610E66B00706B9A /* HISTORY.md */; };
 		45D5ADA31610EADD00706B9A /* ReaderDocumentOutline.m in Sources */ = {isa = PBXBuildFile; fileRef = 45D5ADA21610EADC00706B9A /* ReaderDocumentOutline.m */; };
+		C6AFA03816EF5E5700DAAA48 /* UIView+ExploreViews.h in Headers */ = {isa = PBXBuildFile; fileRef = C6AFA03616EF5E5700DAAA48 /* UIView+ExploreViews.h */; };
+		C6AFA03916EF5E5700DAAA48 /* UIView+ExploreViews.m in Sources */ = {isa = PBXBuildFile; fileRef = C6AFA03716EF5E5700DAAA48 /* UIView+ExploreViews.m */; };
+		C6AFA03A16EF5E8200DAAA48 /* UIView+ExploreViews.m in Sources */ = {isa = PBXBuildFile; fileRef = C6AFA03716EF5E5700DAAA48 /* UIView+ExploreViews.m */; };
 		C6F430BA16D027490095B41E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1D30AB110D05D00D00671497 /* Foundation.framework */; };
 		C6F430BF16D027490095B41E /* ReaderLib.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = C6F430BE16D027490095B41E /* ReaderLib.h */; };
 		C6F430C116D027490095B41E /* ReaderLib.m in Sources */ = {isa = PBXBuildFile; fileRef = C6F430C016D027490095B41E /* ReaderLib.m */; };
@@ -217,6 +220,8 @@
 		45D5ADA11610EADC00706B9A /* ReaderDocumentOutline.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ReaderDocumentOutline.h; path = Sources/ReaderDocumentOutline.h; sourceTree = "<group>"; };
 		45D5ADA21610EADC00706B9A /* ReaderDocumentOutline.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ReaderDocumentOutline.m; path = Sources/ReaderDocumentOutline.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Reader-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Reader-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		C6AFA03616EF5E5700DAAA48 /* UIView+ExploreViews.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+ExploreViews.h"; sourceTree = "<group>"; };
+		C6AFA03716EF5E5700DAAA48 /* UIView+ExploreViews.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+ExploreViews.m"; sourceTree = "<group>"; };
 		C6F4309D16D026DF0095B41E /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
 		C6F430B916D027490095B41E /* libReaderLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libReaderLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6F430BD16D027490095B41E /* ReaderLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ReaderLib-Prefix.pch"; sourceTree = "<group>"; };
@@ -381,6 +386,8 @@
 		45BD5A7C13AE6C3B00D6FE97 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				C6AFA03616EF5E5700DAAA48 /* UIView+ExploreViews.h */,
+				C6AFA03716EF5E5700DAAA48 /* UIView+ExploreViews.m */,
 				45AB72EF141FC0B1003524C3 /* ReaderConstants.h */,
 				45AB72F0141FC0B1003524C3 /* ReaderConstants.m */,
 				C6F4311616D1A5290095B41E /* ReaderScrollView.h */,
@@ -485,6 +492,7 @@
 				C6F4311816D1A5290095B41E /* ReaderScrollView.h in Headers */,
 				C6F4312716D1AC420095B41E /* ReaderContentHighlightView.h in Headers */,
 				C6F4312D16D1AD040095B41E /* ReaderContentContainerView.h in Headers */,
+				C6AFA03816EF5E5700DAAA48 /* UIView+ExploreViews.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -638,6 +646,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
+				C6AFA03A16EF5E8200DAAA48 /* UIView+ExploreViews.m in Sources */,
 				45AB72EB141FC0A2003524C3 /* ReaderAppDelegate.m in Sources */,
 				45AB72EC141FC0A2003524C3 /* ReaderDemoController.m in Sources */,
 				45AB7313141FC0B1003524C3 /* CGPDFDocument.m in Sources */,
@@ -698,6 +707,7 @@
 				C6F4311A16D1A5290095B41E /* ReaderScrollView.m in Sources */,
 				C6F4312916D1AC420095B41E /* ReaderContentHighlightView.m in Sources */,
 				C6F4312F16D1AD040095B41E /* ReaderContentContainerView.m in Sources */,
+				C6AFA03916EF5E5700DAAA48 /* UIView+ExploreViews.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
