@@ -531,14 +531,20 @@
 {
 	__block NSInteger page = 0;
 
-	CGFloat contentOffsetX = scrollView.contentOffset.x;
-
+	CGFloat contentOffsetNew;
+    if (verticalPagingReader)
+        contentOffsetNew = scrollView.contentOffset.y;
+    else
+        contentOffsetNew = scrollView.contentOffset.x;
+    
 	[contentViews enumerateKeysAndObjectsUsingBlock: // Enumerate content views
 		^(id key, id object, BOOL *stop)
 		{
 			ReaderContentView *contentView = object;
 
-			if (contentView.frame.origin.x == contentOffsetX)
+			if (verticalPagingReader ?
+                (contentView.frame.origin.y == contentOffsetNew) :
+                (contentView.frame.origin.x == contentOffsetNew))
 			{
 				page = contentView.tag; *stop = YES;
 			}
@@ -791,7 +797,7 @@
 
 			if (CGRectContainsPoint(areaRect, point) == false) return;
 		}
-
+// PGATODO: Don't understand why this is being activated.
 		[mainToolbar hideToolbar]; [mainPagebar hidePagebar]; // Hide
 
 		lastHideTime = [NSDate date];
