@@ -11,7 +11,7 @@
 // For gesture printing
 //#import "MainViewController.h"
 
-static NSMutableArray* _gestureTargets;
+//static NSMutableArray* _gestureTargets;
 
 void doLog(int level, id formatstring,...);
 
