@@ -82,6 +82,18 @@
 
 #pragma mark Support methods
 
+// PGATODO: These two methods should be added without modifying this file.
+// A category can't access the private vars. What's the right way?
+// Also remove the declarations in the .h
+- (ReaderMainToolbar*)_mainToolbar
+{
+    return mainToolbar;
+}
+- (ReaderMainPagebar*)_mainPagebar
+{
+    return mainPagebar;
+}
+
 - (void)updateScrollViewContentSize
 {
 	NSInteger count = [document.pageCount integerValue];
