@@ -810,7 +810,7 @@
 			if (CGRectContainsPoint(areaRect, point) == false) return;
 		}
 // PGATODO: Don't understand why this is being activated.
-		[mainToolbar hideToolbar]; [mainPagebar hidePagebar]; // Hide
+		//[mainToolbar hideToolbar]; [mainPagebar hidePagebar]; // Hide
 
 		lastHideTime = [NSDate date];
 	}

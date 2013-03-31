@@ -267,7 +267,7 @@
 
 - (void)hideToolbar
 {
-	if (self.hidden == NO)
+	if (self.isHidden == NO)
 	{
 		[UIView animateWithDuration:0.25 delay:0.0
 			options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
@@ -285,7 +285,7 @@
 
 - (void)showToolbar
 {
-	if (self.hidden == YES)
+	if (self.isHidden == YES)
 	{
 		[self updateBookmarkImage]; // First
 
