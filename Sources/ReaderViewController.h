@@ -28,6 +28,8 @@
 #import "ReaderDocument.h"
 
 @class ReaderViewController;
+@class ReaderMainToolbar;
+@class ReaderMainPagebar;
 
 @protocol ReaderViewControllerDelegate <NSObject>
 
@@ -42,5 +44,7 @@
 @property (nonatomic, unsafe_unretained, readwrite) id <ReaderViewControllerDelegate> delegate;
 @property (nonatomic, assign) bool verticalPagingReader;
 - (id)initWithReaderDocument:(ReaderDocument *)object;
+- (ReaderMainToolbar*)_mainToolbar;
+- (ReaderMainPagebar*)_mainPagebar;
 
 @end
