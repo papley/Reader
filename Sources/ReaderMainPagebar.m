@@ -333,7 +333,7 @@
 
 - (void)hidePagebar
 {
-	if (self.isHidden == NO) // Only if visible
+	if (self.hidden == NO) // Only if visible
 	{
 		[UIView animateWithDuration:0.25 delay:0.0
 			options:UIViewAnimationOptionCurveLinear | UIViewAnimationOptionAllowUserInteraction
