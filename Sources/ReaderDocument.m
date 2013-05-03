@@ -197,8 +197,12 @@
 - (id)initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase
 {
 	id object = nil; // ReaderDocument object
+    bool isPath = [ReaderDocument isPDF:fullFilePath] == YES;
 
-	if ([ReaderDocument isPDF:fullFilePath] == YES) // File must exist
+    // TODOPGA this should search for file in core data as well.
+    // Just testing with true.  
+    isPath = true;
+	if (isPath) // File must exist
 	{
 		if ((self = [super init])) // Initialize superclass object first
 		{
@@ -226,6 +230,7 @@
 			}
 			else // Cupertino, we have a problem with the document
 			{
+                return nil;
 				NSAssert(NO, @"CGPDFDocumentRef == NULL");
 			}
 
