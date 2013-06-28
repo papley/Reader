@@ -88,7 +88,7 @@
 {
 	[super viewDidLoad];
 
-	assert(delegate != nil); assert(document != nil);
+	assert(self.delegate != nil); assert(document != nil);
 
 	self.view.backgroundColor = [UIColor scrollViewTexturedBackgroundColor];
 
