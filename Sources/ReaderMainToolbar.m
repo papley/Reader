@@ -307,27 +307,27 @@
 
 - (void)doneButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self doneButton:button];
+	[self.delegate tappedInToolbar:self doneButton:button];
 }
 
 - (void)thumbsButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self thumbsButton:button];
+	[self.delegate tappedInToolbar:self thumbsButton:button];
 }
 
 - (void)printButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self printButton:button];
+	[self.delegate tappedInToolbar:self printButton:button];
 }
 
 - (void)emailButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self emailButton:button];
+	[self.delegate tappedInToolbar:self emailButton:button];
 }
 
 - (void)markButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self markButton:button];
+	[self.delegate tappedInToolbar:self markButton:button];
 }
 
 @end
