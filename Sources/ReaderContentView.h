@@ -45,7 +45,7 @@
 
 - (id)initWithFrame:(CGRect)frame fileURL:(NSURL *)fileURL page:(NSUInteger)page password:(NSString *)phrase;
 
-- (void)showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid;
+- (void)showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid text:(NSString*) text;
 
 - (id)processSingleTap:(UITapGestureRecognizer *)recognizer;
 

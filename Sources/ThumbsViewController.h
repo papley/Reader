@@ -61,6 +61,8 @@
 
 - (void)showText:(NSString *)text;
 
+- (void)showBottomLabel:(NSString *)text;
+
 - (void)showBookmark:(BOOL)show;
 
 @end
