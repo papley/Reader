@@ -48,6 +48,10 @@
 	NSString *_password;
 
 	NSURL *_fileURL;
+
+    NSDictionary* _procedureRow;
+
+    NSString* _procedureLabel;
 }
 
 #pragma mark Properties
@@ -61,6 +65,8 @@
 @synthesize lastOpen = _lastOpen;
 @synthesize password = _password;
 @dynamic fileName, fileURL;
+@synthesize procedureLabel = _procedureLabel;
+@synthesize procedureRow = _procedureRow;
 
 #pragma mark ReaderDocument class methods
 
@@ -327,6 +333,12 @@
 	[encoder encodeObject:_fileSize forKey:@"FileSize"];
 
 	[encoder encodeObject:_lastOpen forKey:@"LastOpen"];
+
+    [encoder encodeObject:_procedureRow forKey:@"ProcedureRow"];
+
+    [encoder encodeObject:_procedureLabel forKey:@"ProcedureLabel"];
+
+
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -349,6 +361,10 @@
 
 		_lastOpen = [decoder decodeObjectForKey:@"LastOpen"];
 
+        _procedureRow = [decoder decodeObjectForKey:@"ProcedureRow"];
+
+        _procedureLabel = [decoder decodeObjectForKey:@"ProcedureLabel"];
+        
 		if (_guid == nil) _guid = [ReaderDocument GUID];
 
 		if (_bookmarks != nil)

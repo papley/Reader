@@ -261,11 +261,13 @@
 
 	[thumbCell showText:[NSString stringWithFormat:@"%d", page]]; // Page number place holder
 
+    //	[thumbCell showBottomLabel:[document procedureLabel]]; // Page number place holder
+
 	[thumbCell showBookmark:[document.bookmarks containsIndex:page]]; // Show bookmarked status
 
 	NSURL *fileURL = document.fileURL; NSString *guid = document.guid; NSString *phrase = document.password; // Document info
 
-	ReaderThumbRequest *thumbRequest = [ReaderThumbRequest newForView:thumbCell fileURL:fileURL password:phrase guid:guid page:page size:size];
+	ReaderThumbRequest *thumbRequest = [ReaderThumbRequest newForView:thumbCell fileURL:fileURL password:phrase guid:guid page:page size:size text: [document procedureLabel]];
 
 	UIImage *image = [[ReaderThumbCache sharedInstance] thumbRequest:thumbRequest priority:YES]; // Request the thumbnail
 
@@ -312,6 +314,8 @@
 	UIView *tintView;
 
 	UILabel *textLabel;
+
+    UILabel *bottomLabel;
 
 	UIImageView *bookMark;
 
@@ -367,6 +371,26 @@
 		textLabel.backgroundColor = [UIColor whiteColor];
 
 		[self insertSubview:textLabel belowSubview:imageView];
+
+        CGRect bottomRect = defaultRect;
+        bottomRect.size.height = defaultRect.size.height*.25;
+        bottomRect.size.width = defaultRect.size.width*.85;
+        bottomRect.origin.x = bottomRect.origin.x+defaultRect.size.width*.075;
+        bottomRect.origin.y = defaultRect.origin.y + defaultRect.size.height*.75;
+		bottomLabel = [[UILabel alloc] initWithFrame:bottomRect];
+        // bottomLabel.adjustsFontSizeToFitWidth = YES;
+        bottomLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        bottomLabel.numberOfLines = 0;
+		bottomLabel.autoresizesSubviews = NO;
+		bottomLabel.userInteractionEnabled = NO;
+		bottomLabel.contentMode = UIViewContentModeRedraw;
+		bottomLabel.autoresizingMask = UIViewAutoresizingNone;
+		bottomLabel.textAlignment = UITextAlignmentCenter;
+		bottomLabel.font = [UIFont systemFontOfSize:fontSize];
+		bottomLabel.textColor = [UIColor colorWithWhite:0.15f alpha:1.0f];
+		bottomLabel.backgroundColor = [UIColor clearColor];
+		[self insertSubview:bottomLabel aboveSubview: imageView];
+
 
 		backView = [[UIView alloc] initWithFrame:defaultRect];
 
@@ -475,6 +499,15 @@
 - (void)showText:(NSString *)text
 {
 	textLabel.text = text;
+}
+
+- (void)showBottomLabel:(NSString *)text
+{
+	bottomLabel.text = text;
+    if (text)
+    {
+        bottomLabel.backgroundColor = [UIColor colorWithWhite:0.8f alpha:0.6f];
+    }
 }
 
 @end

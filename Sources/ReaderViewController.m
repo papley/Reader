@@ -23,8 +23,8 @@
 //	CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "ReaderConstants.h"
 #import "ReaderViewController.h"
+#import "ReaderConstants.h"
 #import "ThumbsViewController.h"
 #import "ReaderMainToolbar.h"
 #import "ReaderMainPagebar.h"
@@ -289,7 +289,7 @@
 
 			ReaderContentView *targetView = [contentViews objectForKey:key];
 
-			[targetView showPageThumb:fileURL page:page password:phrase guid:guid];
+			[targetView showPageThumb:fileURL page:page password:phrase guid:guid text: [document procedureLabel]];
 
 			[newPageSet removeIndex:page]; // Remove visible page from set
 		}
@@ -301,7 +301,7 @@
 
 				ReaderContentView *targetView = [contentViews objectForKey:key];
 
-				[targetView showPageThumb:fileURL page:number password:phrase guid:guid];
+				[targetView showPageThumb:fileURL page:number password:phrase guid:guid text: [document procedureLabel]];
 			}
 		];
 
