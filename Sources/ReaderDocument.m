@@ -205,7 +205,7 @@
 	id object = nil; // ReaderDocument object
     bool isPath = [ReaderDocument isPDF:fullFilePath] == YES;
 
-    // TODOPGA this should search for file in core data as well.
+    // TODO: (PGA) this should search for file in core data as well.
     // Just testing with true.  
     isPath = true;
 	if (isPath) // File must exist
