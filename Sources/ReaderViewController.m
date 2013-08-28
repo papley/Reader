@@ -375,13 +375,13 @@
 	theScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	theScrollView.backgroundColor = [UIColor clearColor];
 	theScrollView.userInteractionEnabled = YES;
-    // TODOPGA: CHANGED TO YES. Does this work?
+    // TODO: (PGA): CHANGED TO YES. Does this work?
     theScrollView.autoresizesSubviews = YES;
 	theScrollView.delegate = self;
 
 	[self.view addSubview:theScrollView];
 
-    // TODOPGA: begin add for printing gestures
+    // TODO: (PGA): begin add for printing gestures
     //    UIPanGestureRecognizer* pangr = theScrollView.panGestureRecognizer;
     //    [pangr addTarget: [[UIApplication sharedApplication] delegate]
     //              action:@selector(printGesture:)];
@@ -422,7 +422,7 @@
 
 	contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate date];
 
-    // TODOPGA: DEBUG ONLY
+    // TODO: (PGA): DEBUG ONLY
     // [[self view] exploreViewAtLevel:0];
 }
 

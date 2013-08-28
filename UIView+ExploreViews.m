@@ -56,7 +56,7 @@ void doLog(int level, id formatstring,...)
 
 @implementation UIView (ExploreViews)
 
-// TODOPGA: Debugging tool
+// TODO: (PGA): Debugging tool
 - (void)observeAllGesturesInSubviews;
 {
     if ([self respondsToSelector:@selector(gestureRecognizers)])
