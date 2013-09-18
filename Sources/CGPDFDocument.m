@@ -50,11 +50,7 @@ CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 	if (theURL != NULL) // Check for non-NULL CFURLRef
 	{
         if (defaultProvider != nil)
-        {
-            CGPDFDocumentRef retVal = [defaultProvider documentWithURL:theURL password:password];
-            CFRetain(retVal);
-            return retVal;
-        }
+            return [defaultProvider newDocumentWithURL:theURL password:password];
         else
         {
             thePDFDocRef = CGPDFDocumentCreateWithURL(theURL);
