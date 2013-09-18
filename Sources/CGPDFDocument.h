@@ -32,7 +32,7 @@
 
 @protocol ReaderPDFDocumentProvider <NSObject>
 
-- (CGPDFDocumentRef) documentWithURL:(CFURLRef)theURL password: (NSString*)password;
+- (CGPDFDocumentRef) newDocumentWithURL:(CFURLRef)theURL password: (NSString*)password;
 
 @end
 
