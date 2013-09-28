@@ -41,7 +41,7 @@
 
 @interface ReaderViewController : UIViewController
 
-@property (nonatomic, unsafe_unretained, readwrite) id <ReaderViewControllerDelegate> delegate;
+@property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 @property (nonatomic, assign) bool verticalPagingReader;
 - (id)initWithReaderDocument:(ReaderDocument *)object;
 - (ReaderMainToolbar*)_mainToolbar;
