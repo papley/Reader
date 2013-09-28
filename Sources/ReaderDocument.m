@@ -3,7 +3,7 @@
 //	Reader v2.6.1
 //
 //	Created by Julius Oklamcak on 2011-07-01.
-//	Copyright © 2011-2012 Julius Oklamcak. All rights reserved.
+//	Copyright © 2011-2013 Julius Oklamcak. All rights reserved.
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -155,20 +155,23 @@
 			NSLog(@"%s Caught %@: %@", __FUNCTION__, [exception name], [exception reason]);
 		#endif
 	}
-
+// TODO: This is just an idea, probably complete garbage
+//    CGPDFDocumentRelease((__bridge CGPDFDocumentRef)(document));
 	return document;
 }
 
 + (ReaderDocument *)withDocumentFilePath:(NSString *)filePath password:(NSString *)phrase
 {
 	ReaderDocument *document = nil; // ReaderDocument object
-
+    // TODO: Added autoreleasepool by PGA. unclear if necessary
+    @autoreleasepool {
 	document = [ReaderDocument unarchiveFromFileName:filePath password:phrase];
 
 	if (document == nil) // Unarchive failed so we create a new ReaderDocument object
 	{
 		document = [[ReaderDocument alloc] initWithFilePath:filePath password:phrase];
 	}
+    }
 
 	return document;
 }
@@ -281,6 +284,11 @@
 	NSString *archiveFilePath = [ReaderDocument archiveFilePath:filename];
 
 	return [NSKeyedArchiver archiveRootObject:self toFile:archiveFilePath];
+}
+
+- (void)dealloc
+{
+
 }
 
 - (void)saveReaderDocument
