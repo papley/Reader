@@ -155,8 +155,8 @@
 			NSLog(@"%s Caught %@: %@", __FUNCTION__, [exception name], [exception reason]);
 		#endif
 	}
-// TODO: This is just an idea, probably complete garbage
-//    CGPDFDocumentRelease((__bridge CGPDFDocumentRef)(document));
+    // TODO: Memory - This is just an idea, probably complete garbage
+    // CGPDFDocumentRelease((__bridge CGPDFDocumentRef)(document));
 	return document;
 }
 

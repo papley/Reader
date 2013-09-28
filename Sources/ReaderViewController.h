@@ -43,6 +43,9 @@
 
 @property (nonatomic, weak, readwrite) id <ReaderViewControllerDelegate> delegate;
 @property (nonatomic, assign) bool verticalPagingReader;
+@property (nonatomic, strong) ReaderMainToolbar* _mainToolbar;
+@property (nonatomic, strong) ReaderMainPagebar* _mainPagebar;
+
 - (id)initWithReaderDocument:(ReaderDocument *)object;
 - (ReaderMainToolbar*)_mainToolbar;
 - (ReaderMainPagebar*)_mainPagebar;

@@ -534,8 +534,13 @@
 
 - (void)dealloc
 {
+    NSLog("Dealloc of ReaderViewController")
     // TODO: Added by PGA. unclear if necessary
-    [mainPagebar removeFromSuperview];
+    // Does this get shadowed or real instance variable? Are we really shadowing?
+    [[self _mainPagebar] removeFromSuperview];
+    [[self _mainToolbar] removeFromSuperview];
+    mainToolbar = nil;
+    mainPagebar = nil;
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

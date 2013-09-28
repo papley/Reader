@@ -156,10 +156,12 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 - (void)dealloc
 {
 //	[self removeObserver:self forKeyPath:@"frame" context:ReaderContentViewContext];
-    // TODO: Added removeFromSuperview (2x) by PGA. unclear if necessary
-    [self removeFromSuperview];
+    // TODO: Added removeFromSuperview (4x) by PGA. unclear if necessary
+    [theThumbView removeFromSuperview];
     [theContentView removeFromSuperview];
-    
+    [theContainerView removeFromSuperview];
+    [self removeFromSuperview];
+
 	[self removeObserver:self forKeyPath:@"frame"]; // Maintain iOS 4.x compatability
 }
 
