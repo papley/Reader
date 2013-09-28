@@ -3,7 +3,7 @@
 //	Reader v2.6.0
 //
 //	Created by Julius Oklamcak on 2011-07-01.
-//	Copyright © 2011-2013 Julius Oklamcak. All rights reserved.
+//	Copyright © 2011-2012 Julius Oklamcak. All rights reserved.
 //
 //	Permission is hereby granted, free of charge, to any person obtaining a copy
 //	of this software and associated documentation files (the "Software"), to deal
@@ -29,53 +29,75 @@
 //	CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef, NSString *) function
 //
 
+static NSObject<ReaderPDFDocumentProvider>* defaultProvider = nil;
+
+
+void CGPDFDocumentSetDefaultProvider(NSObject<ReaderPDFDocumentProvider>* provider)
+{
+    defaultProvider = provider;
+}
+
+NSObject<ReaderPDFDocumentProvider>* CGPDFDocumentGetDefaultProvider()
+{
+    return defaultProvider;
+}
+
+
 CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password)
 {
 	CGPDFDocumentRef thePDFDocRef = NULL;
 
+    @autoreleasepool {
+
 	if (theURL != NULL) // Check for non-NULL CFURLRef
 	{
-		thePDFDocRef = CGPDFDocumentCreateWithURL(theURL);
+        if (defaultProvider != nil)
+            return [defaultProvider newDocumentWithURL:theURL password:password];
+        
+        else
+        {
+            thePDFDocRef = CGPDFDocumentCreateWithURL(theURL);
 
-		if (thePDFDocRef != NULL) // Check for non-NULL CGPDFDocumentRef
-		{
-			if (CGPDFDocumentIsEncrypted(thePDFDocRef) == TRUE) // Encrypted
-			{
-				// Try a blank password first, per Apple's Quartz PDF example
+            if (thePDFDocRef != NULL) // Check for non-NULL CGPDFDocumentRef
+            {
+                if (CGPDFDocumentIsEncrypted(thePDFDocRef) == TRUE) // Encrypted
+                {
+                    // Try a blank password first, per Apple's Quartz PDF example
 
-				if (CGPDFDocumentUnlockWithPassword(thePDFDocRef, "") == FALSE)
-				{
-					// Nope, now let's try the provided password to unlock the PDF
+                    if (CGPDFDocumentUnlockWithPassword(thePDFDocRef, "") == FALSE)
+                    {
+                        // Nope, now let's try the provided password to unlock the PDF
 
-					if ((password != nil) && ([password length] > 0)) // Not blank?
-					{
-						char text[128]; // char array buffer for the string conversion
+                        if ((password != nil) && ([password length] > 0)) // Not blank?
+                        {
+                            char text[128]; // char array buffer for the string conversion
 
-						[password getCString:text maxLength:126 encoding:NSUTF8StringEncoding];
+                            [password getCString:text maxLength:126 encoding:NSUTF8StringEncoding];
 
-						if (CGPDFDocumentUnlockWithPassword(thePDFDocRef, text) == FALSE) // Log failure
-						{
-							#ifdef DEBUG
+                            if (CGPDFDocumentUnlockWithPassword(thePDFDocRef, text) == FALSE) // Log failure
+                            {
+#ifdef DEBUG
 								NSLog(@"CGPDFDocumentCreateX: Unable to unlock [%@] with [%@]", theURL, password);
-							#endif
-						}
-					}
-				}
+#endif
+                            }
+                        }
+                    }
 
-				if (CGPDFDocumentIsUnlocked(thePDFDocRef) == FALSE) // Cleanup unlock failure
-				{
-					CGPDFDocumentRelease(thePDFDocRef), thePDFDocRef = NULL;
-				}
-			}
-		}
+                    if (CGPDFDocumentIsUnlocked(thePDFDocRef) == FALSE) // Cleanup unlock failure
+                    {
+                        CGPDFDocumentRelease(thePDFDocRef), thePDFDocRef = NULL;
+                    }
+                }
+            }
+        }
 	}
 	else // Log an error diagnostic
 	{
-		#ifdef DEBUG
-			NSLog(@"CGPDFDocumentCreateX: theURL == NULL");
-		#endif
+#ifdef DEBUG
+        NSLog(@"CGPDFDocumentCreateX: theURL == NULL");
+#endif
 	}
-
+    }
 	return thePDFDocRef;
 }
 
@@ -104,9 +126,9 @@ BOOL CGPDFDocumentNeedsPassword(CFURLRef theURL, NSString *password)
 					if ((password != nil) && ([password length] > 0)) // Not blank?
 					{
 						char text[128]; // char array buffer for the string conversion
-
+                        
 						[password getCString:text maxLength:126 encoding:NSUTF8StringEncoding];
-
+                        
 						if (CGPDFDocumentUnlockWithPassword(thePDFDocRef, text) == FALSE)
 						{
 							needPassword = YES;
@@ -118,17 +140,17 @@ BOOL CGPDFDocumentNeedsPassword(CFURLRef theURL, NSString *password)
 					}
 				}
 			}
-
+            
 			CGPDFDocumentRelease(thePDFDocRef); // Cleanup CGPDFDocumentRef
 		}
 	}
 	else // Log an error diagnostic
 	{
-		#ifdef DEBUG
-			NSLog(@"CGPDFDocumentNeedsPassword: theURL == NULL");
-		#endif
+#ifdef DEBUG
+        NSLog(@"CGPDFDocumentNeedsPassword: theURL == NULL");
+#endif
 	}
-
+    
 	return needPassword;
 }
 

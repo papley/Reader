@@ -67,6 +67,11 @@
 	return self;
 }
 
+-(void)dealloc
+{
+
+}
+
 - (void)addLoadOperation:(NSOperation *)operation
 {
 	if ([operation isKindOfClass:[ReaderThumbOperation class]])

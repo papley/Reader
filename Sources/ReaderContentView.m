@@ -142,6 +142,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 			[self updateMinimumMaximumZoom]; // Update the minimum and maximum zoom scales
 
 			self.zoomScale = self.minimumZoomScale; // Set zoom to fit page content
+
 		}
 
 		[self addObserver:self forKeyPath:@"frame" options:0 context:ReaderContentViewContext];
@@ -155,11 +156,14 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 - (void)dealloc
 {
 //	[self removeObserver:self forKeyPath:@"frame" context:ReaderContentViewContext];
-
+    // TODO: Added removeFromSuperview (2x) by PGA. unclear if necessary
+    [self removeFromSuperview];
+    [theContentView removeFromSuperview];
+    
 	[self removeObserver:self forKeyPath:@"frame"]; // Maintain iOS 4.x compatability
 }
 
-- (void)showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid
+- (void)showPageThumb:(NSURL *)fileURL page:(NSInteger)page password:(NSString *)phrase guid:(NSString *)guid text:(NSString *)text
 {
 #if (READER_ENABLE_PREVIEW == TRUE) // Option
 
@@ -167,7 +171,7 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 
 	CGSize size = (large ? CGSizeMake(PAGE_THUMB_LARGE, PAGE_THUMB_LARGE) : CGSizeMake(PAGE_THUMB_SMALL, PAGE_THUMB_SMALL));
 
-	ReaderThumbRequest *request = [ReaderThumbRequest newForView:theThumbView fileURL:fileURL password:phrase guid:guid page:page size:size];
+	ReaderThumbRequest *request = [ReaderThumbRequest newForView:theThumbView fileURL:fileURL password:phrase guid:guid page:page size:size text:text];
 
 	UIImage *image = [[ReaderThumbCache sharedInstance] thumbRequest:request priority:YES]; // Request the page thumb
 
@@ -330,4 +334,8 @@ static inline CGFloat ZoomScaleThatFits(CGSize target, CGSize source)
 	return self;
 }
 
+- (void)dealloc
+{
+    
+}
 @end

@@ -48,6 +48,10 @@
 	NSString *_password;
 
 	NSURL *_fileURL;
+
+    NSDictionary* _procedureRow;
+
+    NSString* _procedureLabel;
 }
 
 #pragma mark Properties
@@ -61,6 +65,8 @@
 @synthesize lastOpen = _lastOpen;
 @synthesize password = _password;
 @dynamic fileName, fileURL;
+@synthesize procedureLabel = _procedureLabel;
+@synthesize procedureRow = _procedureRow;
 
 #pragma mark ReaderDocument class methods
 
@@ -149,20 +155,23 @@
 			NSLog(@"%s Caught %@: %@", __FUNCTION__, [exception name], [exception reason]);
 		#endif
 	}
-
+// TODO: This is just an idea, probably complete garbage
+//    CGPDFDocumentRelease((__bridge CGPDFDocumentRef)(document));
 	return document;
 }
 
 + (ReaderDocument *)withDocumentFilePath:(NSString *)filePath password:(NSString *)phrase
 {
 	ReaderDocument *document = nil; // ReaderDocument object
-
+    // TODO: Added autoreleasepool by PGA. unclear if necessary
+    @autoreleasepool {
 	document = [ReaderDocument unarchiveFromFileName:filePath password:phrase];
 
 	if (document == nil) // Unarchive failed so we create a new ReaderDocument object
 	{
 		document = [[ReaderDocument alloc] initWithFilePath:filePath password:phrase];
 	}
+    }
 
 	return document;
 }
@@ -197,8 +206,12 @@
 - (id)initWithFilePath:(NSString *)fullFilePath password:(NSString *)phrase
 {
 	id object = nil; // ReaderDocument object
+    bool isPath = [ReaderDocument isPDF:fullFilePath] == YES;
 
-	if ([ReaderDocument isPDF:fullFilePath] == YES) // File must exist
+    // TODO: (PGA) this should search for file in core data as well.
+    // Just testing with true.  
+    isPath = true;
+	if (isPath) // File must exist
 	{
 		if ((self = [super init])) // Initialize superclass object first
 		{
@@ -226,6 +239,7 @@
 			}
 			else // Cupertino, we have a problem with the document
 			{
+                return nil;
 				NSAssert(NO, @"CGPDFDocumentRef == NULL");
 			}
 
@@ -270,6 +284,11 @@
 	NSString *archiveFilePath = [ReaderDocument archiveFilePath:filename];
 
 	return [NSKeyedArchiver archiveRootObject:self toFile:archiveFilePath];
+}
+
+- (void)dealloc
+{
+
 }
 
 - (void)saveReaderDocument
@@ -322,6 +341,12 @@
 	[encoder encodeObject:_fileSize forKey:@"FileSize"];
 
 	[encoder encodeObject:_lastOpen forKey:@"LastOpen"];
+
+    [encoder encodeObject:_procedureRow forKey:@"ProcedureRow"];
+
+    [encoder encodeObject:_procedureLabel forKey:@"ProcedureLabel"];
+
+
 }
 
 - (id)initWithCoder:(NSCoder *)decoder
@@ -344,6 +369,10 @@
 
 		_lastOpen = [decoder decodeObjectForKey:@"LastOpen"];
 
+        _procedureRow = [decoder decodeObjectForKey:@"ProcedureRow"];
+
+        _procedureLabel = [decoder decodeObjectForKey:@"ProcedureLabel"];
+        
 		if (_guid == nil) _guid = [ReaderDocument GUID];
 
 		if (_bookmarks != nil)

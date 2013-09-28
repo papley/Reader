@@ -45,7 +45,7 @@
 @interface ReaderMainToolbar : UIXToolbarView
 
 @property (nonatomic, unsafe_unretained, readwrite) id <ReaderMainToolbarDelegate> delegate;
-
+@property (nonatomic, strong) UILabel* titleLabel;
 - (id)initWithFrame:(CGRect)frame document:(ReaderDocument *)object;
 
 - (void)setBookmarkState:(BOOL)state;

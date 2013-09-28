@@ -161,6 +161,11 @@
 	return self;
 }
 
+- (void)dealloc
+{
+    
+}
+
 - (id)thumbRequest:(ReaderThumbRequest *)request priority:(BOOL)priority
 {
 	@synchronized(thumbCache) // Mutex lock

@@ -38,6 +38,9 @@
 @property (nonatomic, strong, readonly) NSString *password;
 @property (nonatomic, strong, readonly) NSURL *fileURL;
 
+@property (nonatomic, strong) NSDictionary* procedureRow; // sqlite row for this doc.
+@property (nonatomic, strong) NSString* procedureLabel;
+
 + (ReaderDocument *)withDocumentFilePath:(NSString *)filename password:(NSString *)phrase;
 
 + (ReaderDocument *)unarchiveFromFileName:(NSString *)filename password:(NSString *)phrase;

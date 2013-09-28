@@ -47,6 +47,8 @@
 	CGSize _thumbSize;
 
 	CGFloat _scale;
+
+    NSString *_thumbText;
 }
 
 #pragma mark Properties
@@ -61,17 +63,18 @@
 @synthesize targetTag = _targetTag;
 @synthesize cacheKey = _cacheKey;
 @synthesize scale = _scale;
+@synthesize thumbText = _thumbText;
 
 #pragma mark ReaderThumbRequest class methods
 
-+ (id)newForView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size
++ (id)newForView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size text:(NSString*)text
 {
-	return [[ReaderThumbRequest alloc] initWithView:view fileURL:url password:phrase guid:guid page:page size:size];
+	return [[ReaderThumbRequest alloc] initWithView:view fileURL:url password:phrase guid:guid page:page size:size text:text];
 }
 
 #pragma mark ReaderThumbRequest instance methods
 
-- (id)initWithView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size
+- (id)initWithView:(ReaderThumbView *)view fileURL:(NSURL *)url password:(NSString *)phrase guid:(NSString *)guid page:(NSInteger)page size:(CGSize)size text:(NSString*)text
 {
 	if ((self = [super init])) // Initialize object
 	{
@@ -88,6 +91,8 @@
 		_targetTag = [_cacheKey hash]; _thumbView.targetTag = _targetTag;
 
 		_scale = [[UIScreen mainScreen] scale]; // Thumb screen scale
+
+        _thumbText = text;
 	}
 
 	return self;

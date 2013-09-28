@@ -23,8 +23,8 @@
 //	CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-#import "ReaderConstants.h"
 #import "ReaderViewController.h"
+#import "ReaderConstants.h"
 #import "ThumbsViewController.h"
 #import "ReaderMainToolbar.h"
 #import "ReaderMainPagebar.h"
@@ -289,7 +289,7 @@
 
 			ReaderContentView *targetView = [contentViews objectForKey:key];
 
-			[targetView showPageThumb:fileURL page:page password:phrase guid:guid];
+			[targetView showPageThumb:fileURL page:page password:phrase guid:guid text: [document procedureLabel]];
 
 			[newPageSet removeIndex:page]; // Remove visible page from set
 		}
@@ -301,7 +301,7 @@
 
 				ReaderContentView *targetView = [contentViews objectForKey:key];
 
-				[targetView showPageThumb:fileURL page:number password:phrase guid:guid];
+				[targetView showPageThumb:fileURL page:number password:phrase guid:guid text: [document procedureLabel]];
 			}
 		];
 
@@ -375,13 +375,13 @@
 	theScrollView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	theScrollView.backgroundColor = [UIColor clearColor];
 	theScrollView.userInteractionEnabled = YES;
-    // TODOPGA: CHANGED TO YES. Does this work?
+    // TODO: (PGA): CHANGED TO YES. Does this work?
     theScrollView.autoresizesSubviews = YES;
 	theScrollView.delegate = self;
 
 	[self.view addSubview:theScrollView];
 
-    // TODOPGA: begin add for printing gestures
+    // TODO: (PGA): begin add for printing gestures
     //    UIPanGestureRecognizer* pangr = theScrollView.panGestureRecognizer;
     //    [pangr addTarget: [[UIApplication sharedApplication] delegate]
     //              action:@selector(printGesture:)];
@@ -422,7 +422,7 @@
 
 	contentViews = [NSMutableDictionary new]; lastHideTime = [NSDate date];
 
-    // TODOPGA: DEBUG ONLY
+    // TODO: (PGA): DEBUG ONLY
     // [[self view] exploreViewAtLevel:0];
 }
 
@@ -534,6 +534,8 @@
 
 - (void)dealloc
 {
+    // TODO: Added by PGA. unclear if necessary
+    [mainPagebar removeFromSuperview];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 

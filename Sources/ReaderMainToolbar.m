@@ -37,6 +37,8 @@
 	UIImage *markImageY;
 }
 
+@synthesize titleLabel = _titleLabel;
+
 #pragma mark Constants
 
 #define BUTTON_X 8.0f
@@ -205,21 +207,21 @@
 		{
 			CGRect titleRect = CGRectMake(titleX, BUTTON_Y, titleWidth, TITLE_HEIGHT);
 
-			UILabel *titleLabel = [[UILabel alloc] initWithFrame:titleRect];
+			_titleLabel = [[UILabel alloc] initWithFrame:titleRect];
 
-			titleLabel.textAlignment = UITextAlignmentCenter;
-			titleLabel.font = [UIFont systemFontOfSize:19.0f];
-			titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-			titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
-			titleLabel.textColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
-			titleLabel.shadowColor = [UIColor colorWithWhite:0.65f alpha:1.0f];
-			titleLabel.backgroundColor = [UIColor clearColor];
-			titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
-			titleLabel.adjustsFontSizeToFitWidth = YES;
-			titleLabel.minimumFontSize = 14.0f;
-			titleLabel.text = [object.fileName stringByDeletingPathExtension];
+			_titleLabel.textAlignment = UITextAlignmentCenter;
+			_titleLabel.font = [UIFont systemFontOfSize:19.0f];
+			_titleLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+			_titleLabel.baselineAdjustment = UIBaselineAdjustmentAlignCenters;
+			_titleLabel.textColor = [UIColor colorWithWhite:0.0f alpha:1.0f];
+			_titleLabel.shadowColor = [UIColor colorWithWhite:0.65f alpha:1.0f];
+			_titleLabel.backgroundColor = [UIColor clearColor];
+			_titleLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
+			_titleLabel.adjustsFontSizeToFitWidth = YES;
+			_titleLabel.minimumFontSize = 14.0f;
+			_titleLabel.text = [object.fileName stringByDeletingPathExtension];
 
-			[self addSubview:titleLabel]; 
+			[self addSubview:_titleLabel];
 		}
 	}
 
@@ -305,27 +307,27 @@
 
 - (void)doneButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self doneButton:button];
+	[self.delegate tappedInToolbar:self doneButton:button];
 }
 
 - (void)thumbsButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self thumbsButton:button];
+	[self.delegate tappedInToolbar:self thumbsButton:button];
 }
 
 - (void)printButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self printButton:button];
+	[self.delegate tappedInToolbar:self printButton:button];
 }
 
 - (void)emailButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self emailButton:button];
+	[self.delegate tappedInToolbar:self emailButton:button];
 }
 
 - (void)markButtonTapped:(UIButton *)button
 {
-	[delegate tappedInToolbar:self markButton:button];
+	[self.delegate tappedInToolbar:self markButton:button];
 }
 
 @end

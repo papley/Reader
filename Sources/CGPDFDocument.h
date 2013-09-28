@@ -30,6 +30,16 @@
 //	Custom CGPDFDocument[...] functions
 //
 
+@protocol ReaderPDFDocumentProvider <NSObject>
+
+- (CGPDFDocumentRef) newDocumentWithURL:(CFURLRef)theURL password: (NSString*)password;
+
+@end
+
+void CGPDFDocumentSetDefaultProvider(NSObject<ReaderPDFDocumentProvider>* provider);
+
+NSObject<ReaderPDFDocumentProvider>* CGPDFDocumentGetDefaultProvider();
+
 CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef theURL, NSString *password);
 
 BOOL CGPDFDocumentNeedsPassword(CFURLRef theURL, NSString *password);
