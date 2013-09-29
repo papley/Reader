@@ -532,17 +532,17 @@
 	[super didReceiveMemoryWarning];
 }
 
-- (void)dealloc
-{
-    NSLog("Dealloc of ReaderViewController")
-    // TODO: Added by PGA. unclear if necessary
-    // Does this get shadowed or real instance variable? Are we really shadowing?
-    [[self _mainPagebar] removeFromSuperview];
-    [[self _mainToolbar] removeFromSuperview];
-    mainToolbar = nil;
-    mainPagebar = nil;
-	[[NSNotificationCenter defaultCenter] removeObserver:self];
-}
+//- (void)dealloc
+//{
+//    NSLog("Dealloc of ReaderViewController");
+//    // TODO: Added by PGA. unclear if necessary
+//    // Does this get shadowed or real instance variable? Are we really shadowing?
+//    [[self _mainPagebar] removeFromSuperview];
+//    [[self _mainToolbar] removeFromSuperview];
+//    mainToolbar = nil;
+//    mainPagebar = nil;
+//	[[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 #pragma mark UIScrollViewDelegate methods
 
