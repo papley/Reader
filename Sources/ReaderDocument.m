@@ -210,7 +210,7 @@
 
     // TODO: (PGA) this should search for file in core data as well.
     // Just testing with true.  
-    isPath = true;
+    // isPath = true;
 	if (isPath) // File must exist
 	{
 		if ((self = [super init])) // Initialize superclass object first
