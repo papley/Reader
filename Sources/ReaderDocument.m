@@ -208,9 +208,9 @@
 	id object = nil; // ReaderDocument object
     bool isPath = [ReaderDocument isPDF:fullFilePath] == YES;
 
-    // TODO: (PGA) this should search for file in core data as well.
-    // Just testing with true.  
-    // isPath = true;
+    // TODO: (PGA) Somehow this seems to be getting the plate from core data.
+    // I can't figure out how.
+    isPath = true;
 	if (isPath) // File must exist
 	{
 		if ((self = [super init])) // Initialize superclass object first
