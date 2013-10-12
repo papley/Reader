@@ -208,8 +208,10 @@
 	id object = nil; // ReaderDocument object
     bool isPath = [ReaderDocument isPDF:fullFilePath] == YES;
 
-    // TODO: (PGA) Somehow this seems to be getting the plate from core data.
-    // I can't figure out how.
+    // TODO: (PGA) Somehow this seems to be getting the plate from core data if there's no file.
+    // I can't figure out how. Further, when I commented this out, it was still
+    // displaying some of the plates, but I think only the hotspot ones that
+    // go to multiple states. These must be still be in a directory somewhere. Should they be?
     isPath = true;
 	if (isPath) // File must exist
 	{
