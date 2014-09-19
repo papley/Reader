@@ -213,6 +213,7 @@
     // displaying some of the plates, but I think only the hotspot ones that
     // go to multiple states. These must be still be in a directory somewhere. Should they be?
     isPath = true;
+    _pageCount = 0;
 	if (isPath) // File must exist
 	{
 		if ((self = [super init])) // Initialize superclass object first
@@ -229,8 +230,13 @@
 
 			CFURLRef docURLRef = (__bridge CFURLRef)[self fileURL]; // CFURLRef from NSURL
 
-			CGPDFDocumentRef thePDFDocRef = CGPDFDocumentCreateX(docURLRef, _password);
-
+            CGPDFDocumentRef thePDFDocRef;
+            @try {
+                thePDFDocRef = CGPDFDocumentCreateX(docURLRef, _password);
+            }
+            @catch (NSException * ex) {
+                NSLog(@"exception: %@", ex);
+            }
 			if (thePDFDocRef != NULL) // Get the number of pages in the document
 			{
 				NSInteger pageCount = CGPDFDocumentGetNumberOfPages(thePDFDocRef);
@@ -241,7 +247,7 @@
 			}
 			else // Cupertino, we have a problem with the document
 			{
-                return nil;
+                return self;
 				NSAssert(NO, @"CGPDFDocumentRef == NULL");
 			}
 

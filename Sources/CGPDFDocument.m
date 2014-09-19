@@ -24,7 +24,7 @@
 //
 
 #import "CGPDFDocument.h"
-
+#define DEBUG
 //
 //	CGPDFDocumentRef CGPDFDocumentCreateX(CFURLRef, NSString *) function
 //
