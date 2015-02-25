@@ -1,6 +1,6 @@
 //
 //  UIView+ExploreViews.h
-//  S6E11
+//  EnflightMobile
 //
 //  Created by Phillip G. Apley on 11/27/12.
 //
